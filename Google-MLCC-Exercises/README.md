@@ -1,11 +1,12 @@
 # 1 - MLCC
-通过机器学习，可以有效地解读数据的潜在含义，甚至可以改变思考问题的方式，使用统计信息而非逻辑推理来处理问题。
-Google的机器学习速成课程（MLCC，machine-learning crash-course）：https://developers.google.com/machine-learning/crash-course/
-支持多语言，共25节课程，包含40多项练习，有对算法实际运用的互动直观展示，可以更容易地学习和实践机器学习概念。
-官方预估时间大约15小时(实际花费时间根据个人情况而定，差异较大)。
+Google的机器学习速成课程（MLCC，machine-learning crash-course）
+- https://developers.google.com/machine-learning/crash-course/
+- 支持多语言，共25节课程，包含40多项练习，有对算法实际运用的互动直观展示，可以更容易地学习和实践机器学习概念；
+- 官方预估时间大约15小时(实际花费时间根据个人情况而定，差异较大)；
 
-注意：这里的时间长度指的是教程播放和阅读的时间，而不是你“真正”理解吸收和练习的时间。
-实际上，对于“小白”阶段的新手，可能要投入数倍于此的精力，才能完成整个学习过程（观看、阅读、理解、练习、了解相关知识点、等等）。
+注意：
+- 这里的时间长度指的是教程播放和阅读的时间，而不是你“真正”理解吸收和练习的时间。
+- 实际上，对于“小白”阶段的新手，可能要投入数倍于此的精力，才能完成整个学习过程（观看、阅读、理解、练习、了解相关知识点、等等）。
 
 **本课程将解答如下问题：**
 - 机器学习与传统编程有何不同？
@@ -27,6 +28,7 @@ MLCC相关练习：https://developers.google.com/machine-learning/crash-course/e
 - https://developers.google.com/machine-learning/crash-course/running-exercises-locally
 - 下载练习：http://download.mlcc.google.com/mledu-exercises/mlcc-exercises_en.zip
 - 安装Anaconda（包含Jupyter notebook），创建环境并运行Jupyter Notebook (.ipynb) 格式的编程练习。
+
 例如：
 ```
 (base) >conda create -n mlcc pip python=3.6
@@ -139,9 +141,8 @@ Scikit-Learn（适合评估指标）
 
 
 # 2 - 下一步
-## 2.1 - Google的机器学习指南
-https://developers.google.com/machine-learning/guides/
-通过简单的逐步演示介绍如何利用最佳做法解决常见的机器学习问题。
+## 2.1 - Machine Learning Guides
+Google的机器学习指南：https://developers.google.com/machine-learning/guides/
 - 机器学习规则 (Rules of Machine Learning)： https://developers.google.com/machine-learning/guides/
 - 文本分类：https://developers.google.com/machine-learning/guides/text-classification/
 
@@ -149,7 +150,7 @@ https://developers.google.com/machine-learning/guides/
 ## 2.2 - Machine Learning Practica
 Google的机器学习实践：https://developers.google.com/machine-learning/practica/
 - 图片分类：https://developers.google.com/machine-learning/practica/image-classification/
-- 了解 Google 如何开发用于在 Google 照片中为搜索提供支持的图片分类模型，然后构建您自己的图片分类器。
+- 了解Google如何开发用于在Google照片中为搜索提供支持的图片分类模型，然后构建自己的图片分类器
 
 
 ## 2.3 - 深入了解官网文档 
