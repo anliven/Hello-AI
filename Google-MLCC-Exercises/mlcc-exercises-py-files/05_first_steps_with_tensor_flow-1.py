@@ -1,8 +1,5 @@
 # coding=utf-8
 import math
-from IPython import display
-from matplotlib import cm
-from matplotlib import gridspec
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
@@ -15,8 +12,12 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # ### 设置
 tf.logging.set_verbosity(tf.logging.ERROR)  # 日志
-pd.options.display.max_rows = 10  # 数据显示
+pd.options.display.max_rows = 10  # 显示的最大行数
 pd.options.display.float_format = '{:.1f}'.format
+pd.set_option('display.max_columns', None)  # 显示的最大列数， None表示显示所有列
+pd.set_option('display.width', 200)  # 显示宽度（以字符为单位）
+pd.set_option('max_colwidth', 100)  # 列长度，默认为50
+pd.set_option('expand_frame_repr', False)  # 是否换行显示，False表示不允许， True表示允许
 
 california_housing_dataframe = pd.read_csv("Zcalifornia_housing_train.csv", sep=",")  # 加载数据集
 california_housing_dataframe = california_housing_dataframe.reindex(
@@ -34,7 +35,7 @@ feature_columns = [tf.feature_column.numeric_column("total_rooms")]  # 使用num
 # 第2步：定义目标
 targets = california_housing_dataframe["median_house_value"]
 # 第3步：配置LinearRegressor
-my_optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.0000001)  # 使用梯度下降法训练模型
+my_optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.00005)  # 使用梯度下降法训练模型
 my_optimizer = tf.contrib.estimator.clip_gradients_by_norm(my_optimizer, 5.0)  # 应用梯度裁剪到优化器
 linear_regressor = tf.estimator.LinearRegressor(
     feature_columns=feature_columns,
@@ -113,8 +114,7 @@ plt.scatter(sample["total_rooms"], sample["median_house_value"])  # 从样本数
 plt.show()  # 显示图
 
 # ### 设置
-# 加载必要的库；
-# 进行必要的设置，例如日志级别、数据显示方式等；
+# 加载必要的库并进行必要的设置，例如日志级别、数据显示方式等；
 # 加载数据集并做必要的处理；
 #   -  对数据进行随机化处理，以确保不会出现任何病态排序结果（可能会损害随机梯度下降法的效果）
 #   -  调整数据的单位，便于模型能够以常用范围内的学习速率较为轻松地学习这些数据
