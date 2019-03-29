@@ -6,6 +6,7 @@ Start with these beginner-friendly notebook examples, then read the TensorFlow K
 ```
 - 学习和使用机器学习（Learn and use ML）：https://www.tensorflow.org/tutorials/keras
 - TensorFlow Keras guide：https://www.tensorflow.org/guide/keras
+- ipynb files：https://github.com/tensorflow/docs/tree/master/site/en/tutorials/keras
 
 ## 主要内容
 - 基本分类（Basic classification）：https://www.tensorflow.org/tutorials/keras/basic_classification
