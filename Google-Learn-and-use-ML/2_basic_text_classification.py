@@ -8,10 +8,10 @@ import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 print("TensorFlow version:", tf.__version__)  # TensorFlow版本
-cwd = str(pathlib.Path.cwd()) + "\\"  # 当前目录
+ds_path = str(pathlib.Path.cwd()) + "\\datasets\\imdb\\"  # 数据集路径
 
 # ### 查看numpy格式数据
-np_data = np.load(cwd + "imdb.npz")
+np_data = np.load(ds_path + "imdb.npz")
 print("np_data keys: ", list(np_data.keys()))  # 查看所有的键
 # print("np_data values: ", list(np_data.values()))  # 查看所有的值
 # print("np_data items: ", list(np_data.items()))  # 查看所有的item
@@ -19,7 +19,7 @@ print("np_data keys: ", list(np_data.keys()))  # 查看所有的键
 # ### 加载IMDB数据集
 imdb = keras.datasets.imdb
 (train_data, train_labels), (test_data, test_labels) = imdb.load_data(
-    path=cwd + "imdb.npz",
+    path=ds_path + "imdb.npz",
     num_words=10000  # 保留训练数据中出现频次在前10000位的字词
 )
 
@@ -30,7 +30,7 @@ print("Training entries: {}, labels: {}".format(len(train_data), len(train_label
 print("First record: {}".format(train_data[0]))  # 第一条影评(影评文本已转换为整数，其中每个整数都表示字典中的一个特定字词)
 print("Before len:{} len:{}".format(len(train_data[0]), len(train_data[1])))  # 影评的长度会有所不同
 # 将整数转换回字词
-word_index = imdb.get_word_index(cwd + "imdb_word_index.json")  # 整数值与词汇的映射字典
+word_index = imdb.get_word_index(ds_path + "imdb_word_index.json")  # 整数值与词汇的映射字典
 word_index = {k: (v + 3) for k, v in word_index.items()}
 word_index["<PAD>"] = 0
 word_index["<START>"] = 1
@@ -133,6 +133,7 @@ plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend()
 
+plt.savefig("./outputs/sample-2-figure.png", dpi=200, format='png')
 plt.show()  # 显示图形
 
 # ### 影评文本分类

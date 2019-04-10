@@ -1,6 +1,6 @@
 # Learn and use ML
 ```
-通过多个示例，演示如何使用TensorFlow的高阶Python API tf.keras构建和训练深度学习模型。
+通过实现官网的多个示例，了解如何使用TensorFlow的高阶Python API tf.keras构建和训练深度学习模型。
 The high-level Keras API provides building blocks to create and train deep learning models. 
 Start with these beginner-friendly notebook examples, then read the TensorFlow Keras guide.
 ```
@@ -8,12 +8,12 @@ Start with these beginner-friendly notebook examples, then read the TensorFlow K
 - TensorFlow Keras guide：https://www.tensorflow.org/guide/keras
 - ipynb files：https://github.com/tensorflow/docs/tree/master/site/en/tutorials/keras
 
-## 主要内容
-- 基本分类（Basic classification）：https://www.tensorflow.org/tutorials/keras/basic_classification
-- 文本分类（Text classification）：https://www.tensorflow.org/tutorials/keras/basic_text_classification
-- 回归（Regression）：https://www.tensorflow.org/tutorials/keras/basic_regression
-- 过拟合和欠拟合（Overfitting and underfitting）：https://www.tensorflow.org/tutorials/keras/overfit_and_underfit
-- 保存和恢复模型（Save and restore models）：https://www.tensorflow.org/tutorials/keras/save_and_restore_models
+## 主要内容及链接
+1. 基本分类（Basic classification）：https://www.tensorflow.org/tutorials/keras/basic_classification
+2. 文本分类（Text classification）：https://www.tensorflow.org/tutorials/keras/basic_text_classification
+3. 回归（Regression）：https://www.tensorflow.org/tutorials/keras/basic_regression
+4. 过拟合和欠拟合（Overfitting and underfitting）：https://www.tensorflow.org/tutorials/keras/overfit_and_underfit
+5. 保存和恢复模型（Save and restore models）：https://www.tensorflow.org/tutorials/keras/save_and_restore_models
 
 ## Python files
 - 1_basic_classification.py

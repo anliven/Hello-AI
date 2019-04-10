@@ -35,6 +35,7 @@ plt.figure(num=1)  # 创建图形窗口，参数num是图像编号
 plt.imshow(train_images[0])  # 绘制图片
 plt.colorbar()  # 渐变色度条
 plt.grid(False)  # 显示网格
+plt.savefig("./outputs/sample-1-figure-1.png", dpi=200, format='png')  # 保存文件，必须在plt.show()前使用，否则将是空白内容
 plt.show()  # 显示
 plt.close()  # 关闭figure实例，如果要创建多个figure实例，必须显示调用close方法来释放不再使用的figure实例
 
@@ -51,6 +52,7 @@ for i in range(25):  # 前25张图像
     plt.grid(False)
     plt.imshow(train_images[i], cmap=plt.cm.binary)
     plt.xlabel(class_names[train_labels[i]])  # x坐标轴名称
+plt.savefig("./outputs/sample-1-figure-2.png", dpi=200, format='png')
 plt.show()
 plt.close()
 
@@ -125,6 +127,7 @@ plot_image(i, predictions, test_labels, test_images)
 plt.subplot(1, 2, 2)
 plot_value_array(i, predictions, test_labels)
 plt.xticks(range(10), class_names, rotation=45)  # x坐标轴刻度，参数rotation表示label旋转显示角度
+plt.savefig("./outputs/sample-1-figure-3.png", dpi=200, format='png')
 plt.show()
 plt.close()
 
@@ -136,6 +139,7 @@ plot_image(i, predictions, test_labels, test_images)
 plt.subplot(1, 2, 2)
 plot_value_array(i, predictions, test_labels)
 plt.xticks(range(10), class_names, rotation=45)  # range(10)作为x轴的刻度，class_names作为对应的标签
+plt.savefig("./outputs/sample-1-figure-4.png", dpi=200, format='png')
 plt.show()
 plt.close()
 
@@ -150,6 +154,7 @@ for i in range(num_images):
     plt.subplot(num_rows, 2 * num_cols, 2 * i + 2)
     plot_value_array(i, predictions, test_labels)
     plt.xticks(range(10), class_names, rotation=45)
+plt.savefig("./outputs/sample-1-figure-5.png", dpi=200, format='png')
 plt.show()
 plt.close()
 
@@ -164,6 +169,7 @@ print("prediction_single: {}".format(predictions_single))  # 查看预测，预�
 plt.figure(num=6)
 plot_value_array(0, predictions_single, test_labels)
 plt.xticks(range(10), class_names, rotation=45)
+plt.savefig("./outputs/sample-1-figure-6.png", dpi=200, format='png')
 plt.show()
 plt.close()
 
