@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-print("TensorFlow version:", tf.__version__)  # TensorFlow版本
+print("TensorFlow version: {}  - tf.keras version: {}".format(tf.VERSION, tf.keras.__version__))  # 查看版本
 
 # ### 加载数据集
 # 网络畅通的情况下，可以从 TensorFlow 直接访问 Fashion MNIST，只需导入和加载数据即可
@@ -176,6 +176,12 @@ plt.close()
 prediction_result = np.argmax(predictions_single[0])  # 获取批次数据中相应图像的预测结果（置信度值最大的标签）
 print("prediction_result: {}".format(prediction_result))
 
+# ### Keras与tf.keras
+# - Keras是一个用于构建和训练深度学习模型的高级API
+# - TensorFlow中的tf.keras是Keras API规范的TensorFlow实现，可以运行任何与Keras兼容的代码，保留了一些细微的差别
+# - 最新版TensorFlow中的tf.keras版本可能与PyPI中的最新Keras版本不同
+# - https://www.tensorflow.org/api_docs/python/tf/keras/
+#
 # ### 基本分类
 # 官网示例：https://www.tensorflow.org/tutorials/keras/basic_classification
 # 主要步骤：
@@ -186,10 +192,6 @@ print("prediction_result: {}".format(prediction_result))
 #   5.训练模型
 #   6.评估准确率
 #   7.做出预测：可视化
-#
-# ### tf.keras
-# - 一种用于在TensorFlow中构建和训练模型的高阶API：
-# - https://www.tensorflow.org/api_docs/python/tf/keras/
 #
 # ### Fashion MNIST数据集
 # - 经典 MNIST 数据集（常用作计算机视觉机器学习程序的“Hello, World”入门数据集）的简易替换

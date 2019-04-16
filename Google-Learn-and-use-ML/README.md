@@ -21,3 +21,10 @@ Start with these beginner-friendly notebook examples, then read the TensorFlow K
 - 3_basic_regression.py
 - 4_overfit_and_underfit.py
 - 5_save_and_restore_models.py
+
+# 运行环境及版本
+- Windows 7 Professional 64bit & Windows 10 Home 64bit
+- Python 3.6.8 64bit
+- TensorFlow version: 1.12.0(tf.keras version: 2.1.6-tf)
+- PyCharm Community Edition 2018.3.3 x64
+- Anaconda3 5.3.0 64-bit

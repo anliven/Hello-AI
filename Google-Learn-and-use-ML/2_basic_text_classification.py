@@ -7,7 +7,7 @@ import pathlib
 import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-print("TensorFlow version:", tf.__version__)  # TensorFlow版本
+print("TensorFlow version: {}  - tf.keras version: {}".format(tf.VERSION, tf.keras.__version__))  # 查看版本
 ds_path = str(pathlib.Path.cwd()) + "\\datasets\\imdb\\"  # 数据集路径
 
 # ### 查看numpy格式数据
@@ -101,7 +101,7 @@ history = model.fit(partial_x_train,
                     batch_size=512,  # 批量大小（每次梯度更新的样本数）
                     validation_data=(x_val, y_val),  # 验证数据
                     verbose=2  # 日志显示模式：0为安静模式, 1为进度条（默认）, 2为每轮一行
-                    )  # 返回一个 History 对象，包含一个字典，其中包括训练期间发生的所有情况
+                    )  # 返回一个history对象，包含一个字典，其中包括训练期间发生的所有情况
 
 # ### 评估模型
 # 在测试模式下返回模型的误差值和评估标准值
@@ -136,7 +136,7 @@ plt.legend()
 plt.savefig("./outputs/sample-2-figure.png", dpi=200, format='png')
 plt.show()  # 显示图形
 
-# ### 影评文本分类
+# ### 基本文本分类
 # 官网示例：https://www.tensorflow.org/tutorials/keras/basic_text_classification
 # 主要步骤：
 #   1.加载IMDB数据集
@@ -152,6 +152,5 @@ plt.show()  # 显示图形
 # https://www.tensorflow.org/api_docs/python/tf/keras/datasets/imdb
 # 包含来自互联网电影数据库的50000条影评文本
 #
-# ### tf.keras
-# 是一种用于在TensorFlow中构建和训练模型的高阶API：https://www.tensorflow.org/api_docs/python/tf/keras/
-# MLCC文本分类指南：https://developers.google.com/machine-learning/guides/text-classification/
+# ### MLCC文本分类指南
+# https://developers.google.com/machine-learning/guides/text-classification/
