@@ -75,7 +75,7 @@ model.add(keras.layers.GlobalAveragePooling1D())
 model.add(keras.layers.Dense(16, activation=tf.nn.relu))
 # 最后一层与单个输出节点密集连接。应用sigmoid激活函数后，结果是介于 0 到 1 之间的浮点值，表示概率或置信水平
 model.add(keras.layers.Dense(1, activation=tf.nn.sigmoid))
-print("Model summary: ".format(model.summary()))
+model.summary()  # 打印出关于模型的简单描述
 
 # ### 损失函数和优化器
 # 模型在训练时需要一个损失函数和一个优化器

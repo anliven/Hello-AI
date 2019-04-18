@@ -82,7 +82,7 @@ test_loss, test_acc = model.evaluate(test_images, test_labels)
 print('Test loss: {} - Test accuracy: {}'.format(test_loss, test_acc))
 
 # ### 做出预测
-predictions = model.predict(test_images)
+predictions = model.predict(test_images)  # 使用predict()方法进行预测
 print("The first prediction: {}".format(predictions[0]))  # 查看第一个预测结果(包含10个数字的数组，分别对应10种服饰的“置信度”
 label_number = np.argmax(predictions[0])  # 置信度值最大的标签
 print("label: {} - class name: {}".format(label_number, class_names[label_number]))
