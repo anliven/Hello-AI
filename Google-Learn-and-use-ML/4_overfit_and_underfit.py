@@ -36,7 +36,7 @@ def multi_hot_sequences(sequences, dimension):
 train_data = multi_hot_sequences(train_data, dimension=NUM_WORDS)
 test_data = multi_hot_sequences(test_data, dimension=NUM_WORDS)
 
-plt.plot(train_data[0])  # 查看其中的一个多热向量（字词索引按频率排序，因此索引 0 附近应该有更多的 1 值）
+plt.plot(train_data[0])  # 查看其中的一个多热向量（字词索引按频率排序，因此索引0附近应该有更多的1值）
 plt.savefig("./outputs/sample-4-figure-1.png", dpi=200, format='png')
 plt.show()
 plt.close()
@@ -54,7 +54,7 @@ baseline_model.compile(optimizer='adam',
 baseline_model.summary()  # 打印出关于模型的简单描述
 baseline_history = baseline_model.fit(train_data,
                                       train_labels,
-                                      epochs=10,
+                                      epochs=20,
                                       batch_size=512,
                                       validation_data=(test_data, test_labels),
                                       verbose=2)  # 训练模型
@@ -71,7 +71,7 @@ smaller_model.compile(optimizer='adam',
 smaller_model.summary()
 smaller_history = smaller_model.fit(train_data,
                                     train_labels,
-                                    epochs=10,
+                                    epochs=20,
                                     batch_size=512,
                                     validation_data=(test_data, test_labels),
                                     verbose=2)  # 使用相同的数据训练
@@ -88,21 +88,20 @@ bigger_model.compile(optimizer='adam',
 bigger_model.summary()
 bigger_history = bigger_model.fit(train_data,
                                   train_labels,
-                                  epochs=10,
+                                  epochs=20,
                                   batch_size=512,
                                   validation_data=(test_data, test_labels),
                                   verbose=2)  # 使用相同的数据训练
 
 
 # 绘制训练损失和验证损失图表
-# 验证损失越低，表示模型越好
-# 实线表示训练损失，虚线表示验证损失
+# 这里实线表示训练损失，虚线表示验证损失(验证损失越低，表示模型越好)
 def plot_history(histories, key='binary_crossentropy'):
     plt.figure(figsize=(16, 10))
     for name, his in histories:
         val = plt.plot(his.epoch,
                        his.history['val_' + key],
-                       '--',
+                       linestyle='--',  # 默认颜色的虚线（dashed line with default color）
                        label=name.title() + ' Val')
         plt.plot(his.epoch,
                  his.history[key],
@@ -122,11 +121,14 @@ plt.close()
 # ### 策略
 # 添加权重正则化
 l2_model = keras.models.Sequential([
-    keras.layers.Dense(16, kernel_regularizer=keras.regularizers.l2(0.001), activation=tf.nn.relu,
+    keras.layers.Dense(16,
+                       kernel_regularizer=keras.regularizers.l2(0.001),  # 添加L2权重正则化
+                       activation=tf.nn.relu,
                        input_shape=(NUM_WORDS,)),
-    keras.layers.Dense(16, kernel_regularizer=keras.regularizers.l2(0.001), activation=tf.nn.relu),
-    keras.layers.Dense(1, activation=tf.nn.sigmoid)
-])
+    keras.layers.Dense(16,
+                       kernel_regularizer=keras.regularizers.l2(0.001),  # 实际上是将权重正则化项实例作为关键字参数传递给层
+                       activation=tf.nn.relu),
+    keras.layers.Dense(1, activation=tf.nn.sigmoid)])
 l2_model.compile(optimizer='adam',
                  loss='binary_crossentropy',
                  metrics=['accuracy', 'binary_crossentropy'])
@@ -135,18 +137,18 @@ l2_model_history = l2_model.fit(train_data,
                                 epochs=20,
                                 batch_size=512,
                                 validation_data=(test_data, test_labels),
-                                verbose=2)
+                                verbose=2)  # 使用相同的数据训练
 plot_history([('baseline', baseline_history), ('l2', l2_model_history)])
 plt.savefig("./outputs/sample-4-figure-3.png", dpi=200, format='png')
-plt.show()
+plt.show()  # 查看在训练阶段添加L2正则化惩罚的影响，此过拟合抵抗能力强于基准模型
 plt.close()
 
 # 添加丢弃层
 dpt_model = keras.models.Sequential([
     keras.layers.Dense(16, activation=tf.nn.relu, input_shape=(NUM_WORDS,)),
-    keras.layers.Dropout(0.5),
+    keras.layers.Dropout(0.5),  # 通过丢弃层将丢弃引入网络中，以便事先将其应用于层的输出
     keras.layers.Dense(16, activation=tf.nn.relu),
-    keras.layers.Dropout(0.5),
+    keras.layers.Dropout(0.5),  # 添加丢弃层，“丢弃率”设置在0.5
     keras.layers.Dense(1, activation=tf.nn.sigmoid)
 ])
 dpt_model.compile(optimizer='adam',
@@ -178,10 +180,11 @@ plt.close()
 # 在训练集上可以实现很高的准确率，但无法很好地泛化到测试数据（或之前未见过的数据）。
 # 可能导致欠拟合的原因：训练时间过长等。
 # 防止过拟合的最常见方法：
-#   - 推荐：使用更多训练数据
+#   - 推荐：获取并使用更多训练数据
 #   - 最简单：适当缩小模型（降低网络容量）
-#   - 添加权重正则化（限制模型可以存储的信息的数量和类型）
+#   - 添加权重正则化（限制网络的复杂性，也就是限制可存储信息的数量和类型）
 #   - 添加丢弃层
+# 此外还有两个重要的方法：数据增强和批次归一化。
 #
 # ### 欠拟合
 # 与过拟合相对的就是欠拟合，测试数据仍存在改进空间，意味着模型未学习到训练数据中的相关模式。
@@ -195,3 +198,20 @@ plt.close()
 # 如果模型太小（记忆资源有限），便无法轻松学习映射，难以与训练数据拟合。
 # 需要尝试不断地尝试来确定合适的模型大小或架构（由层数或每层的合适大小决定）。
 # 最好先使用相对较少的层和参数，然后开始增加层的大小或添加新的层，直到看到返回的验证损失不断减小为止。
+#
+# ### 奥卡姆剃刀定律
+# 如果对于同一现象有两种解释，最可能正确的解释是“最简单”的解释，即做出最少量假设的解释。
+# 也适用于神经网络学习的模型：给定一些训练数据和一个网络架构，有多组权重值（多个模型）可以解释数据，而简单模型比复杂模型更不容易过拟合。
+# 简单模型”是一种参数值分布的熵较低的模型（或者具有较少参数的模型）。
+#
+# ### 权重正则化
+# 限制网络的复杂性，具体方法是强制要求其权重仅采用较小的值，使权重值的分布更“规则”。
+# 通过向网络的损失函数添加与权重较大相关的代价来实现。
+# - L1正则化，其中所添加的代价与权重系数的绝对值（即所谓的权重“L1 范数”）成正比。
+# - L2正则化，其中所添加的代价与权重系数值的平方（即所谓的权重“L2 范数”）成正比，也称为权重衰减。
+#
+# ### 丢弃层
+# 添加丢弃层可明显改善基准模型，是最有效且最常用的神经网络正则化技术之一。
+# 丢弃（应用于某个层）是指在训练期间随机“丢弃”（即设置为 0）该层的多个输出特征。
+# “丢弃率”指变为 0 的特征所占的比例，通常设置在 0.2 和 0.5 之间。
+# 因为“测试时的活跃单元数大于训练时的活跃单元数”，因此测试时网络不会丢弃任何单元，而是将层的输出值按等同于丢弃率的比例进行缩减。
