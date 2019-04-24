@@ -5,7 +5,6 @@ The high-level Keras API provides building blocks to create and train deep learn
 Start with these beginner-friendly notebook examples, then read the TensorFlow Keras guide.
 ```
 - 学习和使用机器学习（Learn and use ML）：https://www.tensorflow.org/tutorials/keras
-- TensorFlow Keras guide：https://www.tensorflow.org/guide/keras
 - ipynb files：https://github.com/tensorflow/docs/tree/master/site/en/tutorials/keras
 
 ## 主要内容及链接
